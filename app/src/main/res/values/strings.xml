@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">praktikum8</string>
+    <string name="app_name">Data Siswa</string>
     <string name="entry_siswa">Tambah Siswa</string>
-    <string name="deskripsi_no_item">Tidak ada data Siswa. Tap + untuk menambah data</string>
+    <string name="deskripsi_no_item">0</string>
     <string name="nama">Nama Siswa*</string>
     <string name="alamat">Alamat Siswa*</string>
     <string name="telpon">Telpon Siswa*</string>
@@ -19,11 +19,4 @@
     <string name="update">Edit</string>
     <string name="attention">Perhatian</string>
     <string name="tanya">Apakah anda yakin menghapus ini ?</string>
-
-
-
-
-
-
-
 </resources>
