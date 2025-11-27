@@ -4,6 +4,8 @@ package com.example.praktikum8.repositori
 import android.app.Application
 import android.content.Context
 import com.example.praktikum8.room.DatabaseSiswa
+import com.example.praktikum8.room.Siswa // Pastikan jalur ini benar
+
 
 interface ContainerApp {
     val repositoriSiswa : RepositoriSiswa
