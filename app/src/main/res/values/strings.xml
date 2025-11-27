@@ -9,6 +9,8 @@
     <string name="alamat1">Alamat Siswa :</string>
     <string name="telpon1">Telpon Siswa :</string>
     <string name="required_field">* required fields</string>
+    <string name="btn_submit">Submit</string>
+
 
 
 
