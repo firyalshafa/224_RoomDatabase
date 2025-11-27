@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.prak9"
+    namespace = "com.example.praktikum8"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.prak9"
+        applicationId = "com.example.praktikum8"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
