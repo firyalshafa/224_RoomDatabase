@@ -13,9 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.praktikum8.R
 
-
 @OptIn(ExperimentalMaterial3Api::class)
-
 @Composable
 fun SiswaTopAppBar(
     title: String,
@@ -23,9 +21,8 @@ fun SiswaTopAppBar(
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior? = null,
     navigateUp: () -> Unit = {}
-) {
-    CenterAlignedTopAppBar(
-        title = { Text(text = title) },
+){
+    CenterAlignedTopAppBar(title = { Text(title) },
         modifier = modifier,
         scrollBehavior = scrollBehavior,
         navigationIcon = {
@@ -33,10 +30,9 @@ fun SiswaTopAppBar(
                 IconButton(onClick = navigateUp) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = stringResource(id = R.string.back)  // Corrected here
+                        contentDescription = stringResource(id = R.string.back)
                     )
                 }
             }
-        }
-    )
+        })
 }
