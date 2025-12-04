@@ -16,29 +16,17 @@ import com.example.praktikum8.view.route.DestinasiHome
 
 
 
-
-
 @Composable
-fun SiswaApp(navController: NavHostController = rememberNavController(), modifier: Modifier = Modifier) {
+fun SiswaApp(navController: NavHostController = rememberNavController(), modifier: Modifier){
     HostNavigasi(navController = navController)
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HostNavigasi(
     navController: NavHostController,
-    modifier: Modifier = Modifier
-) {
-    NavHost(navController = navController, startDestination = DestinasiHome.route, modifier = modifier) {
-        composable(route = DestinasiHome.route) {
-            HomeScreen(
-                navigateToItemEntry = { navController.navigate(route = DestinasiEntry.route) },
-            )
-        }
-        composable(route = DestinasiEntry.route) {
-            EntrySiswaScreen(navigateBack = { navController.popBackStack() })
-        }
-    }
-}
+    modifier: Modifier = Modifier){}
+
 
 
