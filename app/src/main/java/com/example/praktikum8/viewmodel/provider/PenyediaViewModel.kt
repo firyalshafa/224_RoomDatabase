@@ -36,4 +36,3 @@ fun CreationExtras.aplikasiSiswa(): AplikasiSiswa =
      */
     fun aplikasiSiswa(extras: CreationExtras): AplikasiSiswa =
         (extras[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as AplikasiSiswa)
-}
