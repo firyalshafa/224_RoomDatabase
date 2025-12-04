@@ -20,6 +20,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp // Diperlukan untuk Dp
@@ -34,25 +35,26 @@ import com.example.praktikum8.viewmodel.provider.PenyediaViewModel
 import com.example.praktikum8.viewmodel.UIStateSiswa // Perlu import UIStateSiswa
 import kotlinx.coroutines.launch
 
-// HAPUS: import androidx.compose.material3.R
+
+
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EntrySiswaScreen(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: EntryViewModel = viewModel(factory = PenyediaViewModel.Factory)
-) {
+    viewModel: EntryViewModel = viewModel (factory = PenyediaViewModel.Factory)
+){
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    Scaffold (
-        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             SiswaTopAppBar(
-                title = stringResource(id = DestinasiEntry.titleRes),
+                title = stringResource(DestinasiEntry.titleRes),
                 canNavigateBack = true,
-                // PERBAIKAN 1: Ganti 'navigateBack' menjadi 'navigateUp'
-                navigateUp = navigateBack,
                 scrollBehavior = scrollBehavior
             )
         }
@@ -67,8 +69,8 @@ fun EntrySiswaScreen(
                 }
             },
             modifier = Modifier
-                .padding(paddingValues = innerPadding)
-                .verticalScroll(state = rememberScrollState())
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
                 .fillMaxWidth()
         )
     }
@@ -77,14 +79,13 @@ fun EntrySiswaScreen(
 @Composable
 fun EntrySiswaBody(
     uiStateSiswa: UIStateSiswa,
-    onSiswaValueChange: (DetailSiswa) -> Unit,
+    onSiswaValueChange:(DetailSiswa) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
-) {
-    Column (
-        // PERBAIKAN 3: Gunakan Dp eksplisit
-        verticalArrangement = Arrangement.spacedBy(space = 20.dp),
-        modifier = modifier.padding(all = 16.dp)
+){
+    Column(
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large)),
+        modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium))
     ) {
         FormInputSiswa(
             detailSiswa = uiStateSiswa.detailSiswa,
@@ -97,8 +98,7 @@ fun EntrySiswaBody(
             shape = MaterialTheme.shapes.small,
             modifier = Modifier.fillMaxWidth()
         ) {
-            // PERBAIKAN 2: Gunakan R.string.btn_submit
-            Text(text = stringResource(id = R.string.btn_submit))
+            Text(stringResource(R.string.btn_submit))
         }
     }
 }
@@ -110,53 +110,44 @@ fun FormInputSiswa(
     modifier: Modifier = Modifier,
     onValueChange: (DetailSiswa) -> Unit = {},
     enabled: Boolean = true
-) {
+){
     Column(
         modifier = modifier,
-        // PERBAIKAN 3: Gunakan Dp eksplisit
-        verticalArrangement = Arrangement.spacedBy(space = 16.dp)
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
     ) {
         OutlinedTextField(
             value = detailSiswa.nama,
-            onValueChange = { onValueChange(detailSiswa.copy(nama = it)) },
-            // PERBAIKAN 2: Gunakan R.string.nama
-            label = { Text(text = stringResource(id = R.string.nama)) },
+            onValueChange = {onValueChange(detailSiswa.copy(nama = it))},
+            label = {Text(stringResource(R.string.nama))},
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
         OutlinedTextField(
             value = detailSiswa.alamat,
-            onValueChange = { onValueChange(detailSiswa.copy(alamat = it)) },
-            // PERBAIKAN 2: Gunakan R.string.alamat
-            label = { Text(text = stringResource(id = R.string.alamat)) },
+            onValueChange = {onValueChange(detailSiswa.copy(alamat = it))},
+            label = {Text(stringResource(R.string.alamat))},
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
         OutlinedTextField(
             value = detailSiswa.telpon,
-            onValueChange = { onValueChange(detailSiswa.copy(telpon = it)) },
-            label = { Text(text = stringResource(id = R.string.telpon)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            onValueChange = {onValueChange(detailSiswa.copy(telpon = it))},
+            label = {Text(stringResource(R.string.telpon))},
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
 
-        if (enabled) {
+        if (enabled){
             Text(
-                // PERBAIKAN 2: Gunakan R.string.required_field
-                text = stringResource(id = R.string.required_field),
-                // PERBAIKAN 3: Gunakan Dp eksplisit
-                modifier = Modifier.padding(start = 16.dp)
+                stringResource(R.string.required_field),
+                modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_medium))
             )
         }
-        HorizontalDivider(
-            // PERBAIKAN 3: Gunakan Dp eksplisit
-            modifier = Modifier.padding(bottom = 16.dp),
-            thickness = 8.dp,
-            color = Color.Blue
-        )
+        HorizontalDivider(modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_medium)),
+            thickness = dimensionResource(id = R.dimen.padding_small),
+            color = Color.Blue)
     }
 }
