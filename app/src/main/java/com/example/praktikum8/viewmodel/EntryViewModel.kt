@@ -4,28 +4,27 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-//import com.example.praktikum8.repositori.RepositoriSiswa
-import com.example.praktikum8.room.Siswa
 import com.example.praktikum8.repositori.RepositoriSiswa
+import com.example.praktikum8.room.Siswa
 
-class EntryViewModel (private val repositoriSiswa: RepositoriSiswa) : ViewModel(){
+class EntryViewModel(private val repositoriSiswa: RepositoriSiswa) : ViewModel() {
 
     var uiStateSiswa by mutableStateOf(UIStateSiswa())
         private set
 
-    private fun validasiInput(uiState: DetailSiswa = uiStateSiswa.detailSiswa) : Boolean{
-        return with(uiState){
-            nama.isNotBlank() && alamat.isNotBlank()&& telpon.isNotBlank()
+    private fun validasiInput(uiState: DetailSiswa = uiStateSiswa.detailSiswa): Boolean {
+        return with(uiState) {
+            nama.isNotBlank() && alamat.isNotBlank() && telpon.isNotBlank()
         }
     }
 
-    fun updateUiState(detailSiswa: DetailSiswa){
+    fun updateUiState(detailSiswa: DetailSiswa) {
         uiStateSiswa =
             UIStateSiswa(detailSiswa = detailSiswa, isEntryValid = validasiInput(detailSiswa))
     }
 
-    suspend fun saveSiswa(){
-        if (validasiInput()){
+    suspend fun saveSiswa() {
+        if (validasiInput()) {
             repositoriSiswa.insertSiswa(uiStateSiswa.detailSiswa.toSiswa())
         }
     }
@@ -36,14 +35,14 @@ data class UIStateSiswa(
     val isEntryValid: Boolean = false
 )
 
-
 data class DetailSiswa(
-    val id : Int = 0,
+    val id: Int = 0,
     val nama: String = "",
     val alamat: String = "",
-    val telpon: String = "",
+    val telpon: String = ""
 )
 
+// Extension functions untuk konversi
 fun DetailSiswa.toSiswa(): Siswa = Siswa(
     id = id,
     nama = nama,
@@ -51,7 +50,7 @@ fun DetailSiswa.toSiswa(): Siswa = Siswa(
     telpon = telpon
 )
 
-fun Siswa.toUIStateSiswa(isEntryValid: Boolean = false):UIStateSiswa = UIStateSiswa(
+fun Siswa.toUIStateSiswa(isEntryValid: Boolean = false): UIStateSiswa = UIStateSiswa(
     detailSiswa = this.toDetailSiswa(),
     isEntryValid = isEntryValid
 )
