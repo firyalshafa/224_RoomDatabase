@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.praktikum8.view.route.DestinasiDetailSiswa
 //import com.example.praktikum8.DestinasiEntry
 import com.example.praktikum8.view.route.DestinasiEntry
 //import com.example.praktikum8.view.route.DestinasiEntry
@@ -26,7 +27,22 @@ fun SiswaApp(navController: NavHostController = rememberNavController(), modifie
 @Composable
 fun HostNavigasi(
     navController: NavHostController,
-    modifier: Modifier = Modifier){}
+    modifier: Modifier = Modifier)
+{
+    NavHost(navController=navController, startDestination = DestinasiHome.route, modifier = Modifier)
+    {
+        composable(DestinasiHome.route){
+            HomeScreen(
+                navigateToItemEntry = {navController.navigate(route = DestinasiEntry.route)},
+                navigateToItemDetail = {navController.navigate(route = "${DestinasiDetailSiswa.route}/${it}")}
+            )
+        }
+        composable(DestinasiEntry.route){
+            EntrySiswaScreen(
+                navigateBack = { navController.popBackStack() }
+            )
+
+        }}}
 
 
 
